@@ -1,16 +1,29 @@
 from PIL import Image
+path = "./depthLayer/"
+image = Image.open(path + "depthImage2.png")
 
-
-def getDepthLevels(nom_fichier, chemin=None) :
-    img = Image.open(nom_fichier)
+def getDepthLevels(img) :
     depthLevels = []
-    depthMap = []
     for i in range(img.height) :
         for j in range(img.width) :
             depth = img.getpixel((j,i))[:3]
             if not depth in depthLevels :
                 depthLevels.append(depth)
     depthLevels.sort(key=lambda x: (x[0]+x[1]+x[2]), reverse=True)
-    return depthLevels, depthMap
+    return depthLevels
 
-print(getDepthLevels("depthImage.png"))
+#print(getDepthLevels(image))
+
+
+def getDepthMap(img) :
+    depthMap = [[] for i in range(img.height)]
+    depthLevels = getDepthLevels(img)
+    for i in range(img.height) :
+        for j in range(img.width) :
+            color = img.getpixel((j,i))[:3]
+            depth = depthLevels.index(color)
+            depthMap[i].append(depth)
+    return depthMap
+
+
+#print(getDepthMap(image))
