@@ -1,6 +1,6 @@
 from PIL import Image
-path = "./depthLayer/"
-image = Image.open(path + "depthImage2.png")
+path = "./image_To_Edit/"
+image = Image.open(path + "imageTest.png")
 
 def getDepthLevels(img) :
     depthLevels = []
