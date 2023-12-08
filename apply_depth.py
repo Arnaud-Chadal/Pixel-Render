@@ -1,7 +1,7 @@
 from depth_layer import *
 
-path = "./depth_Layer/"
-image = Image.open(path + "depthImage2.png")
+path = "./image_To_Edit/"
+image = Image.open(path + "imageTest.png")
 size = 10
 
 
@@ -14,7 +14,7 @@ def resizer(img) :
             color = img.getpixel((j,i))[:3]
             for m in range(size) :
                 for n in range(size) :
-                    if m in [0] or n in [0] :
+                    if m in [0, size-1] or n in [0, size-1] :
                         img2.putpixel((j*size+m,i*size+n), (0, 0, 0))
                     else : img2.putpixel((j*size+m,i*size+n), color)
     img2.show()
