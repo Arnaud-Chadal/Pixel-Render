@@ -27,4 +27,4 @@ def getDepthMap(img) :
     return depthMap
 
 
-# print(getDepthMap(Image.open("./depth_Layer/depthImage2.png")))
+print(getDepthMap(Image.open("./depth_Layer/depthImage2.png")))
