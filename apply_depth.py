@@ -4,7 +4,7 @@ path = "./image_To_Edit/"
 pathLayer = "./depth_Layer/"
 image = Image.open(path + "apple.png")
 layer = Image.open(pathLayer + "apple_depth.png")
-size = 10
+size = 100
 
 
 def resizer(img) :
@@ -21,17 +21,17 @@ def resizer(img) :
             for m in range(size) :
                 for n in range(size) :
                     if north :
-                        if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(180-m*45) and 180-m*45 >= 0 :
-                            img2.putpixel((i*size+m,j*size+n), (color[0]-(180-m*45), color[1]-(180-m*45), color[2]-(180-m*45)))
+                        if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-m*2) and 80-m*2 >= 0 :
+                            img2.putpixel((i*size+m,j*size+n), (color[0]-(80-m*2), color[1]-(80-m*2), color[2]-(80-m*2)))
                     if south :
-                        if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(180-(size-m)*45) and 180-(size-m)*45 >= 0 :
-                            img2.putpixel((i*size+m,j*size+n), (color[0]-(180-(size-m)*45), color[1]-(180-(size-m)*45), color[2]-(180-(size-m)*45)))
+                        if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-(size-m)*2) and 80-(size-m)*2 >= 0 :
+                            img2.putpixel((i*size+m,j*size+n), (color[0]-(80-(size-m)*2), color[1]-(80-(size-m)*2), color[2]-(80-(size-m)*2)))
                     if west :
-                        if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(180-n*45) and 180-n*45 >= 0 :
-                            img2.putpixel((i*size+m,j*size+n), (color[0]-(180-n*45), color[1]-(180-n*45), color[2]-(180-n*45)))
+                        if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-n*2) and 80-n*2 >= 0 :
+                            img2.putpixel((i*size+m,j*size+n), (color[0]-(80-n*2), color[1]-(80-n*2), color[2]-(80-n*2)))
                     if east :
-                        if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(180-(size-n)*45) and 180-(size-n)*45 >= 0 :
-                            img2.putpixel((i*size+m,j*size+n), (color[0]-(180-(size-n)*45), color[1]-(180-(size-n)*45), color[2]-(180-(size-n)*45)))
+                        if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-(size-n)*2) and 80-(size-n)*2 >= 0 :
+                            img2.putpixel((i*size+m,j*size+n), (color[0]-(80-(size-n)*2), color[1]-(80-(size-n)*2), color[2]-(80-(size-n)*2)))
                     if not(north or south or west or east) or img2.getpixel((i*size+m,j*size+n))[0] == 255 :
                             img2.putpixel((i*size+m,j*size+n), color)
     img2.show()
