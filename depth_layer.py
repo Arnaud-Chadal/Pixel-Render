@@ -13,16 +13,17 @@ def getDepthLevels(img) :
 #print(getDepthLevels(image))
 
 
-def getDepthMap(img) :
+def getDepthMap(img, levels) :
     depthMap = [[] for i in range(img.height+2)]
-    depthLevels = getDepthLevels(img)
     for i in range(img.height+2) :
         for j in range(img.width+2) :
             if j == 0 or j == img.width+1 or i == 0 or i == img.height+1 :
                 depthMap[i].append(-1)
             else :
                 color = img.getpixel((j-1,i-1))[:3]
-                depth = depthLevels.index(color)
+                depth = levels.index(color)
+                if depth == 0 :
+                    depth = -1
                 depthMap[i].append(depth)
     return depthMap
 
