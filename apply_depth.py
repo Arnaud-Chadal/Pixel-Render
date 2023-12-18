@@ -2,17 +2,20 @@ from depth_layer import *
 
 path = "./image_To_Edit/"
 pathLayer = "./depth_Layer/"
-image = Image.open(path + "apple.png")
-layer = Image.open(pathLayer + "apple_depth.png")
+image = Image.open(path + "lemon.png")
+layer = Image.open(pathLayer + "lemon_depth.png")
 depth_levels = getDepthLevels(layer)
 size = 100
+
+strenght = 100
+lenght = 4
 
 
 def resizer(img) :
     name = "test.png"
     depthMap = getDepthMap(layer, depth_levels)
     print(depthMap)
-    img2 = Image.new('RGBA', (img.height*size, img.width*size), "white")
+    img8 = Image.new('RGBA', (img.height*size, img.width*size), "white")
     for i in range(img.height) :
         for j in range(img.width) :
             color = img.getpixel((i, j))[:3]
@@ -28,36 +31,36 @@ def resizer(img) :
                 for m in range(size) :
                     for n in range(size) :
                         if north :
-                            if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-m*2) and 80-m*2 >= 0 :
-                                img2.putpixel((i*size+m,j*size+n), (color[0]-(80-m*2), color[1]-(80-m*2), color[2]-(80-m*2)))
+                            if img8.getpixel((i*size+m,j*size+n))[0] > color[0]-(strenght-m*lenght) and strenght-m*lenght >= 0 :
+                                img8.putpixel((i*size+m,j*size+n), (color[0]-(strenght-m*lenght), color[1]-(strenght-m*lenght), color[2]-(strenght-m*lenght)))
                         if south :
-                            if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-(size-m)*2) and 80-(size-m)*2 >= 0 :
-                                img2.putpixel((i*size+m,j*size+n), (color[0]-(80-(size-m)*2), color[1]-(80-(size-m)*2), color[2]-(80-(size-m)*2)))
+                            if img8.getpixel((i*size+m,j*size+n))[0] > color[0]-(strenght-(size-m)*lenght) and strenght-(size-m)*lenght >= 0 :
+                                img8.putpixel((i*size+m,j*size+n), (color[0]-(strenght-(size-m)*lenght), color[1]-(strenght-(size-m)*lenght), color[2]-(strenght-(size-m)*lenght)))
                         if west :
-                            if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-n*2) and 80-n*2 >= 0 :
-                                img2.putpixel((i*size+m,j*size+n), (color[0]-(80-n*2), color[1]-(80-n*2), color[2]-(80-n*2)))
+                            if img8.getpixel((i*size+m,j*size+n))[0] > color[0]-(strenght-n*lenght) and strenght-n*lenght >= 0 :
+                                img8.putpixel((i*size+m,j*size+n), (color[0]-(strenght-n*lenght), color[1]-(strenght-n*lenght), color[2]-(strenght-n*lenght)))
                         if east :
-                            if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-(size-n)*2) and 80-(size-n)*2 >= 0 :
-                                img2.putpixel((i*size+m,j*size+n), (color[0]-(80-(size-n)*2), color[1]-(80-(size-n)*2), color[2]-(80-(size-n)*2)))
+                            if img8.getpixel((i*size+m,j*size+n))[0] > color[0]-(strenght-(size-n)*lenght) and strenght-(size-n)*lenght >= 0 :
+                                img8.putpixel((i*size+m,j*size+n), (color[0]-(strenght-(size-n)*lenght), color[1]-(strenght-(size-n)*lenght), color[2]-(strenght-(size-n)*lenght)))
                         if northwest :
-                            if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-max(m, n)*2) and 80-max(m, n)*2 >= 0 :
-                                img2.putpixel((i*size+m,j*size+n), (color[0]-(80-max(m, n)*2), color[1]-(80-max(m, n)*2), color[2]-(80-max(m, n)*2)))
+                            if img8.getpixel((i*size+m,j*size+n))[0] > color[0]-(strenght-max(m, n)*lenght) and strenght-max(m, n)*lenght >= 0 :
+                                img8.putpixel((i*size+m,j*size+n), (color[0]-(strenght-max(m, n)*lenght), color[1]-(strenght-max(m, n)*lenght), color[2]-(strenght-max(m, n)*lenght)))
                         if northeast :
-                            if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-max(m, (size-n))*2) and 80-max(m, (size-n))*2 >= 0 :
-                                img2.putpixel((i*size+m,j*size+n), (color[0]-(80-max(m, (size-n))*2), color[1]-(80-max(m, (size-n))*2), color[2]-(80-max(m, (size-n))*2)))
+                            if img8.getpixel((i*size+m,j*size+n))[0] > color[0]-(strenght-max(m, (size-n))*lenght) and strenght-max(m, (size-n))*lenght >= 0 :
+                                img8.putpixel((i*size+m,j*size+n), (color[0]-(strenght-max(m, (size-n))*lenght), color[1]-(strenght-max(m, (size-n))*lenght), color[2]-(strenght-max(m, (size-n))*lenght)))
                         if southwest :
-                            if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-max((size-m), n)*2) and 80-max((size-m), n)*2 >= 0 :
-                                img2.putpixel((i*size+m,j*size+n), (color[0]-(80-max((size-m), n)*2), color[1]-(80-max((size-m), n)*2), color[2]-(80-max((size-m), n)*2)))
+                            if img8.getpixel((i*size+m,j*size+n))[0] > color[0]-(strenght-max((size-m), n)*lenght) and strenght-max((size-m), n)*lenght >= 0 :
+                                img8.putpixel((i*size+m,j*size+n), (color[0]-(strenght-max((size-m), n)*lenght), color[1]-(strenght-max((size-m), n)*lenght), color[2]-(strenght-max((size-m), n)*lenght)))
                         if southeast :
-                            if img2.getpixel((i*size+m,j*size+n))[0] > color[0]-(80-max((size-m), (size-n))*2) and 80-max((size-m), (size-n))*2 >= 0 :
-                                img2.putpixel((i*size+m,j*size+n), (color[0]-(80-max((size-m), (size-n))*2), color[1]-(80-max((size-m), (size-n))*2), color[2]-(80-max((size-m), (size-n))*2)))
-                        if not(north or south or west or east or northwest or northeast or southwest or southeast) or img2.getpixel((i*size+m,j*size+n))[0] == 255 :
-                            img2.putpixel((i*size+m,j*size+n), color)
+                            if img8.getpixel((i*size+m,j*size+n))[0] > color[0]-(strenght-max((size-m), (size-n))*lenght) and strenght-max((size-m), (size-n))*lenght >= 0 :
+                                img8.putpixel((i*size+m,j*size+n), (color[0]-(strenght-max((size-m), (size-n))*lenght), color[1]-(strenght-max((size-m), (size-n))*lenght), color[2]-(strenght-max((size-m), (size-n))*lenght)))
+                        if not(north or south or west or east or northwest or northeast or southwest or southeast) or img8.getpixel((i*size+m,j*size+n))[0] == 255 :
+                            img8.putpixel((i*size+m,j*size+n), color)
             else :
                 for m in range(size) :
                     for n in range(size) :
-                        img2.putpixel((i*size+m,j*size+n), color)
-    img2.show()
-    img2.save("./resized_Images/" + name)
+                        img8.putpixel((i*size+m,j*size+n), color)
+    img8.show()
+    img8.save("./resized_Images/" + name)
 
 resizer(image)
